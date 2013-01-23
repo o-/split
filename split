@@ -19,7 +19,7 @@ def config
 end
 
 def escape(url)
-  "'#{URI::encode(url).gsub("'","\\'")}'"
+  "'#{URI::encode(url).gsub('\'','\'"\'"\'')}'"
 end
 
 def rules
