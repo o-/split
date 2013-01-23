@@ -1,0 +1,11 @@
+
+split personalities web browsing
+
+--------------------------------
+
+
+Split opens links in different browsers / profiles based on the url.
+
+1. Adjust the split.config to match url regexes to browser profiles.
+2. Install split as x-www-browser.
+3. Fuck graph search.
