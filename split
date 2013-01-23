@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require 'uri'
+
+def config_file
+  ['./split.conf','~/.split.conf','/etc/split.conf'].each do |f|
+    file = File.expand_path(f)
+    return file if File.exists?(f)
+  end
+  fail 'No config file found!'
+end
+
+def config
+  @config ||= YAML::load_file(config_file)
+end
+
+def escape(url)
+  "'#{URI::encode(url).gsub("'","\\'")}'"
+end
+
+def rules
+  config['rules']
+end
+
+def browsers
+  config['browsers']
+end
+
+def default_personality
+  config['default']
+end
+
+def match_url(url)
+  rules.each do |personality,rules|
+    return personality if rules.any?{|rule| Regexp.new(rule).match(url)}
+  end
+  nil
+end
+
+def personality2cmd(personality)
+  (browser,profile) = personality.split(':')
+  browser = browsers[browser]
+  "#{browser['bin']} #{browser['profile_switch']} #{profile} #{browser['profiles'][profile]}" 
+end
+
+def open(url)
+  personality = match_url(url) || default_personality
+  cmd = personality2cmd(personality)
+  puts `#{cmd} #{escape(url)}`
+end
+
+open ARGV[0]
