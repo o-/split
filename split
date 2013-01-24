@@ -11,7 +11,7 @@ fail "no url to invoke" unless URL
 def config_file
   ['./split.conf','~/.split.conf','/etc/split.conf'].each do |f|
     file = File.expand_path(f)
-    return file if File.exists?(f)
+    return file if File.exists?(file)
   end
   fail 'No config file found!'
 end
