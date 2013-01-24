@@ -42,6 +42,7 @@ sudo update-alternatives --set x-www-browser /usr/local/bin/split
 
 # customize your config, define the profiles you need and add domains for your usecases
 cp split.conf ~/.split.conf
+vim ~/.split.conf
 
 # test your rules with
 split --test someurl
