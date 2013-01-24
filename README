@@ -19,6 +19,17 @@ You can tell it which urls to open in which browser or profile. Thus
 you can compartmentalize the different parts of your online existence.
 
 
+limitations
+-----------
+
+* Firefox always opens links in the first opened window, even if an
+  other profile is given in the command line. Thus split cannot support
+  multiple profiles for firefox. We should file a bug report against 
+  firefox... 
+* Although you can define new browser, split is currently only tested
+  with firefox and chromium.
+
+
 install (debian like)
 ---------------------
 
@@ -31,8 +42,11 @@ sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/loc
 # set it to be the primary choice
 sudo update-alternatives --set x-www-browser /usr/local/bin/split
 
-# customize your config, define the profiles you need and add regexes for your usecases
+# customize your config, define the profiles you need and add domains for your usecases
 cp split.conf ~/.split.conf
+
+# test your rules with
+split --test someurl
 
 
 How to use
@@ -40,7 +54,7 @@ How to use
 
 * Set your shell, mail client, desktop environment, etc. to open links 
   with x-www-browser, if they don't already.
-* For firefox: install launchy add-on and place the launchy.xml into 
-  your chrome folder (see launchy settings for details).
+* For links in firefox: install launchy add-on and place the 
+  launchy.xml into your chrome folder (see launchy settings for details).
   
 

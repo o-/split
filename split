@@ -3,10 +3,13 @@
 require 'yaml'
 require 'uri'
 
-DRY_RUN = ARGV[0] == '-d'
+DRY_RUN = ARGV[0] == '--test'
 URL = if DRY_RUN then ARGV[1] else ARGV[0] end
 
-fail "no url to invoke" unless URL
+unless URL
+  puts "usage: split [--test] <url>"
+  exit
+end
 
 def config_file
   ['./split.conf','~/.split.conf','/etc/split.conf'].each do |f|
@@ -36,23 +39,42 @@ def default_personality
   config['default'] or fail "no default personality configured."
 end
 
+def domain(url)
+  uri = URI.parse(url)
+  uri = URI.parse("http://#{url}") if uri.scheme.nil?
+  uri.host.downcase
+end
+
 def match_url(url)
+  host = domain(url)
   rules.each do |personality,rules|
-    return personality if rules.any?{|rule| Regexp.new(rule).match(url)}
+    return personality if rules.any?{|rule| host.end_with? rule}
   end
   nil
+end
+
+def browser_cmd(browser,profile)
+  additional_opts = browser['profiles'][profile]
+  if browser['bin'] =~ /firefox/ || browser['bin'] =~ /iceweasel/
+    if browser['profiles'].size > 1
+      fail "Firefox does not support multiple running profiles, sorry!"
+    end
+    "#{browser['bin']} #{additional_opts}"
+  else
+    "#{browser['bin']} #{browser['profile_switch']}#{profile} #{additional_opts}"
+  end
 end
 
 def personality2cmd(personality)
   (browser,profile) = personality.split(':')
   browser = browsers[browser]
-  "#{browser['bin']} #{browser['profile_switch']}#{profile} #{browser['profiles'][profile]}" 
+  browser_cmd(browser,profile)
 end
 
 def open(url)
   personality = match_url(url) || default_personality
   cmd = personality2cmd(personality)
-  cmd = "#{cmd} #{escape(url)}"
+  cmd = "#{cmd} #{escape(url)} &"
   if DRY_RUN
     puts cmd
   else
