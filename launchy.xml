@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations xmlns="http://launchy.mozdev.org/configurations">
+  <application>
+    <label>split</label>
+    <type>1</type>
+    <command>/usr/local/bin/split</command>
+  </application>
+</configurations>
