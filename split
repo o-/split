@@ -6,6 +6,8 @@ require 'uri'
 DRY_RUN = ARGV[0] == '-d'
 URL = if DRY_RUN then ARGV[1] else ARGV[0] end
 
+fail "no url to invoke" unless URL
+
 def config_file
   ['./split.conf','~/.split.conf','/etc/split.conf'].each do |f|
     file = File.expand_path(f)
@@ -31,7 +33,7 @@ def browsers
 end
 
 def default_personality
-  config['default']
+  config['default'] or fail "no default personality configured."
 end
 
 def match_url(url)
