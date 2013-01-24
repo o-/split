@@ -4,18 +4,13 @@ split personalities web browsing
 --------------------------------
 
 
-Split opens links in different browsers / profiles based on the url.
+You're receiving tons of links per day! Stuff like calendar invitations,
+forcing you to login. Or articles on flashy news sites loading content 
+from 20 different domains, fucking up your RequestPolicy. Don't mention
+the overflowing tab-list.
 
-
-You're receiving tons of links per day. Some forcing you to login, like 
-calendar invitations. If you store cookies this has privacy implication 
-for your whole surf-session. Other links point to flashy news sites 
-loading content from 20 different domains, fucking up RequestPolicy and 
-NoScript noadd-ons. Additionally the tab-list quickly overflows, and you 
-don't find anything no more.
-
-Split is a configurable url-opener tool which deals with those issues.
-You can tell it which urls to open in which browser or profile. Thus
+Split is a configurable url-opener which deals with those issues.
+You can tell it which domains to open in which browser or profile. Thus
 you can compartmentalize the different parts of your online existence.
 
 
@@ -23,15 +18,18 @@ limitations
 -----------
 
 * Firefox always opens links in the first opened window, even if an
-  other profile is given in the command line. Thus split cannot support
+  other profile is given at the command line. Thus split cannot support
   multiple profiles for firefox. We should file a bug report against 
   firefox... 
-* Although you can define new browser, split is currently only tested
-  with firefox and chromium.
+* Although you can easily add new browsers, split is currently only 
+  tested with firefox and chromium.
 
 
 install (debian like)
 ---------------------
+
+# get split
+git clone https://github.com/o-/split.git && cd split
 
 # install split
 sudo install -o root -g root -m 755 split /usr/local/bin
