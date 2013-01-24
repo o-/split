@@ -6,6 +6,41 @@ split personalities web browsing
 
 Split opens links in different browsers / profiles based on the url.
 
-1. Adjust the split.config to match url regexes to browser profiles.
-2. Install split as x-www-browser.
-3. Fuck graph search.
+
+You're receiving tons of links per day. Some forcing you to login, like 
+calendar invitations. If you store cookies this has privacy implication 
+for your whole surf-session. Other links point to flashy news sites 
+loading content from 20 different domains, fucking up RequestPolicy and 
+NoScript noadd-ons. Additionally the tab-list quickly overflows, and you 
+don't find anything no more.
+
+Split is a configurable url-opener tool which deals with those issues.
+You can tell it which urls to open in which browser or profile. Thus
+you can compartmentalize the different parts of your online existence.
+
+
+install (debian like)
+---------------------
+
+# install split
+sudo install -o root -g root -m 755 split /usr/local/bin
+
+# add it to the browsers
+sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/split 10
+
+# set it to be the primary choice
+sudo update-alternatives --set x-www-browser /usr/local/bin/split
+
+# customize your config, define the profiles you need and add regexes for your usecases
+cp split.conf ~/.split.conf
+
+
+How to use
+----------
+
+* Set your shell, mail client, desktop environment, etc. to open links 
+  with x-www-browser, if they don't already.
+* For firefox: install launchy add-on and place the launchy.xml into 
+  your chrome folder (see launchy settings for details).
+  
+
