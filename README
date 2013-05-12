@@ -4,10 +4,10 @@ split personalities web browsing
 --------------------------------
 
 
-You're receiving tons of links per day! Stuff like calendar invitations,
-forcing you to login. Or articles on flashy news sites loading content 
-from 20 different domains, fucking up your RequestPolicy. Don't mention
-the overflowing tab-list.
+You're receiving tons of links per day - things like calendar invitations,
+forcing you to login somewhere. Or articles from flashy news sites loading
+content from 20 different domains, fucking up your RequestPolicy. Don't
+mention the overflowing tab-list.
 
 Split is a configurable url-opener which deals with those issues.
 You can tell it which domains to open in which browser or profile. Thus
@@ -40,7 +40,7 @@ sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/loc
 # set it to be the primary choice
 sudo update-alternatives --set x-www-browser /usr/local/bin/split
 
-# customize your config, define the profiles you need and add domains for your usecases
+# customize your config, define the profiles you need and add your rules
 cp split.conf ~/.split.conf
 vim ~/.split.conf
 
@@ -48,7 +48,7 @@ vim ~/.split.conf
 split --test someurl
 
 # if you use gnome
-sudo cp /usr/share/applications/split.desktop .
+sudo cp split.desktop /usr/share/applications/
 sudo update-mime-database /usr/share/mime
 
 # then select it as default browser in the gnome-control-center (see "Details")
