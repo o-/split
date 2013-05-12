@@ -47,12 +47,19 @@ vim ~/.split.conf
 # test your rules with
 split --test someurl
 
+# if you use gnome
+sudo cp /usr/share/applications/split.desktop .
+sudo update-mime-database /usr/share/mime
+
+# then select it as default browser in the gnome-control-center (see "Details")
 
 How to use
 ----------
 
 * Set your shell, mail client, desktop environment, etc. to open links 
   with x-www-browser, if they don't already.
+* For links in chromium: see
+  https://chrome.google.com/webstore/detail/open-with-external-applic/hccmhjmmfdfncbfpogafcbpaebclgjcp
 * For links in firefox: install launchy add-on and place the 
   launchy.xml into your chrome folder (see launchy settings for details).
   

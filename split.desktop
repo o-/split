@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Split
+GenericName=Web Browser
+Comment=Access the Internet
+Exec=/usr/local/bin/split %U
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
